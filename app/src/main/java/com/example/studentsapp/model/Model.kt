@@ -4,22 +4,6 @@ class Model private constructor() {
 
     private val students: MutableList<Student> = ArrayList()
 
-    init {
-        // Dummy data
-        for (i in 0..5) {
-            val student = Student(
-                id = i.toString(),
-                name = "Student $i",
-                idNumber = "123456$i",
-                phone = "050-123456$i",
-                address = "Address $i",
-                isChecked = false,
-                pictureUrl = ""
-            )
-            students.add(student)
-        }
-    }
-
     companion object {
         val instance: Model by lazy { Model() }
     }

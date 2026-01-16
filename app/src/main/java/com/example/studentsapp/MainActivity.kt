@@ -38,7 +38,8 @@ class MainActivity : AppCompatActivity() {
         binding.studentsRecyclerView.adapter = adapter
 
         binding.addStudentFab.setOnClickListener {
-            // TODO: Open New Student Activity
+            val intent = Intent(this, NewStudentActivity::class.java)
+            startActivity(intent)
         }
     }
     
