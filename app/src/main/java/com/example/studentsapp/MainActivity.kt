@@ -19,6 +19,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        Model.instance.init(this)
+
         val students = Model.instance.getAllStudents()
 
         binding.studentsRecyclerView.setHasFixedSize(true)
@@ -47,6 +49,7 @@ class MainActivity : AppCompatActivity() {
     
     override fun onResume() {
         super.onResume()
+        adapter?.students = Model.instance.getAllStudents()
         adapter?.notifyDataSetChanged()
     }
 }

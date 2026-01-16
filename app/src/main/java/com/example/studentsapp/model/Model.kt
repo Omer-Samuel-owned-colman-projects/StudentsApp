@@ -1,36 +1,42 @@
 package com.example.studentsapp.model
 
-class Model private constructor() {
+import android.content.Context
 
-    private val students: MutableList<Student> = ArrayList()
+class Model private constructor() {
 
     companion object {
         val instance: Model by lazy { Model() }
     }
 
+    fun init(context: Context) {
+        AppLocalDb.init(context)
+    }
+
     fun getAllStudents(): List<Student> {
-        return students
+        return AppLocalDb.db?.studentDao()?.getAllStudents() ?: emptyList()
     }
 
     fun addStudent(student: Student) {
-        students.add(student)
+        AppLocalDb.db?.studentDao()?.insert(student)
     }
 
-    fun updateStudent(updatedStudent: Student) {
-        val index = students.indexOfFirst { it.id == updatedStudent.id }
-        if (index != -1) {
-            students[index] = updatedStudent
-        }
+    fun updateStudent(student: Student) {
+        AppLocalDb.db?.studentDao()?.update(student)
     }
 
     fun deleteStudent(student: Student) {
-        val index = students.indexOfFirst { it.id == student.id }
-        if (index != -1) {
-            students.removeAt(index)
-        }
+        AppLocalDb.db?.studentDao()?.delete(student)
     }
 
     fun getStudentById(id: String): Student? {
-        return students.find { it.id == id }
+        return AppLocalDb.db?.studentDao()?.getStudentById(id)
+    }
+
+    fun updateStudentCheckStatus(id: String, isChecked: Boolean) {
+        val student = getStudentById(id)
+        student?.let {
+            it.isChecked = isChecked
+            updateStudent(it)
+        }
     }
 }

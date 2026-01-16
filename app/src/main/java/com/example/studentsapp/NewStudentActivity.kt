@@ -29,17 +29,13 @@ class NewStudentActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // Using UUID for internal ID, or just reusing the ID number if preferred.
-            // Requirement says "Student list presents... id".
-            // Let's use a UUID for the unique ID and the input ID for the student ID number
             val student = Student(
                 id = UUID.randomUUID().toString(),
                 name = name,
                 idNumber = idNumber,
                 phone = phone,
                 address = address,
-                isChecked = isChecked,
-                pictureUrl = "" // Static for now
+                isChecked = isChecked
             )
 
             Model.instance.addStudent(student)

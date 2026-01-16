@@ -68,8 +68,7 @@ class EditStudentActivity : AppCompatActivity() {
             idNumber = idNumber,
             phone = phone,
             address = address,
-            isChecked = isChecked,
-            pictureUrl = currentStudent!!.pictureUrl
+            isChecked = isChecked
         )
         
         Model.instance.updateStudent(updatedStudent)
