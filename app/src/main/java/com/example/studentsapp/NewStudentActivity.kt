@@ -35,7 +35,9 @@ class NewStudentActivity : AppCompatActivity() {
                 idNumber = idNumber,
                 phone = phone,
                 address = address,
-                isChecked = isChecked
+                isChecked = isChecked,
+                birthDate = "",
+                birthTime = ""
             )
 
             Model.instance.addStudent(student)

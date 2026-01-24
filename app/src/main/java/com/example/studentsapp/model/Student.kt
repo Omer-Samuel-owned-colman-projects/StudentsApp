@@ -11,5 +11,7 @@ data class Student(
     val idNumber: String,
     val phone: String,
     val address: String,
+    val birthDate: String = "",
+    val birthTime: String = "",
     var isChecked: Boolean = false
 )

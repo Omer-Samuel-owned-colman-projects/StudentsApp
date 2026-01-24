@@ -50,4 +50,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/new_student_address_et" />
 
+    <EditText
+        android:id="@+id/new_student_birth_date_et"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Birth Date"
+        android:focusable="false"
+        android:clickable="true"
+        android:inputType="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/new_student_checked_cb" />
+
+    <EditText
+        android:id="@+id/new_student_birth_time_et"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Birth Time"
+        android:focusable="false"
+        android:clickable="true"
+        android:inputType="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/new_student_birth_date_et" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

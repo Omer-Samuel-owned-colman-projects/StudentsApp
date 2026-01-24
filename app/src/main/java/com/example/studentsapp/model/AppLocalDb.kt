@@ -5,7 +5,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import android.content.Context
 
-@Database(entities = [Student::class], version = 2)
+@Database(entities = [Student::class], version = 3)
 abstract class AppLocalDbRepository : RoomDatabase() {
     abstract fun studentDao(): StudentDao
 }

@@ -68,7 +68,9 @@ class EditStudentActivity : AppCompatActivity() {
             idNumber = idNumber,
             phone = phone,
             address = address,
-            isChecked = isChecked
+            isChecked = isChecked,
+            birthDate = currentStudent!!.birthDate,
+            birthTime = currentStudent!!.birthTime
         )
         
         Model.instance.updateStudent(updatedStudent)
