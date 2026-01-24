@@ -45,7 +45,7 @@ class StudentDetailsFragment : Fragment() {
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return if (menuItem.itemId == R.id.edit_student_action) {
-                     val action = StudentDetailsFragmentDirections.actionStudentDetailsFragmentToEditStudentFragment(studentId)
+                     val action = StudentDetailsFragmentDirections.actionStudentDetailsFragmentToEditStudentFragment(studentId ?: "")
                      findNavController().navigate(action)
                      true
                 } else {
@@ -70,9 +70,7 @@ class StudentDetailsFragment : Fragment() {
             binding.studentDetailsForm.newStudentAddressEt.setText(student.address)
             binding.studentDetailsForm.newStudentCheckedCb.isChecked = student.isChecked
             binding.studentDetailsForm.newStudentBirthDateEt.setText(student.birthDate)
-            binding.studentDetailsForm.newStudentBirthTimeEt.setText(student.birthTime)
         } else {
-            // Student might have been deleted, navigate back
              findNavController().popBackStack()
         }
     }
@@ -84,14 +82,12 @@ class StudentDetailsFragment : Fragment() {
         binding.studentDetailsForm.newStudentAddressEt.isEnabled = false
         binding.studentDetailsForm.newStudentCheckedCb.isEnabled = false
         binding.studentDetailsForm.newStudentBirthDateEt.isEnabled = false
-        binding.studentDetailsForm.newStudentBirthTimeEt.isEnabled = false
         
         binding.studentDetailsForm.newStudentNameEt.setTextColor(resources.getColor(android.R.color.black, null))
         binding.studentDetailsForm.newStudentIdEt.setTextColor(resources.getColor(android.R.color.black, null))
         binding.studentDetailsForm.newStudentPhoneEt.setTextColor(resources.getColor(android.R.color.black, null))
         binding.studentDetailsForm.newStudentAddressEt.setTextColor(resources.getColor(android.R.color.black, null))
         binding.studentDetailsForm.newStudentBirthDateEt.setTextColor(resources.getColor(android.R.color.black, null))
-        binding.studentDetailsForm.newStudentBirthTimeEt.setTextColor(resources.getColor(android.R.color.black, null))
     }
 
     override fun onDestroyView() {
