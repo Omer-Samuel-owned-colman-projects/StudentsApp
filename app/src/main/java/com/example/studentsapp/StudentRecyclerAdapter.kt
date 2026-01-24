@@ -21,7 +21,7 @@ class StudentRecyclerAdapter(var students: List<Student>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StudentViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.student_list_row, parent, false)
-        return StudentViewHolder(itemView, listener, students)
+        return StudentViewHolder(itemView, listener)
     }
 
     override fun onBindViewHolder(holder: StudentViewHolder, position: Int) {
@@ -33,8 +33,7 @@ class StudentRecyclerAdapter(var students: List<Student>) :
 
     inner class StudentViewHolder(
         itemView: View,
-        listener: OnItemClickListener?,
-        students: List<Student>
+        listener: OnItemClickListener?
     ) : RecyclerView.ViewHolder(itemView) {
 
         private val nameTextView: TextView = itemView.findViewById(R.id.student_row_name)

@@ -26,8 +26,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/student_row_check_box"
         app:layout_constraintStart_toEndOf="@+id/student_row_image"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/student_row_id"
