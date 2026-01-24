@@ -50,17 +50,49 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/new_student_address_et" />
 
-    <EditText
-        android:id="@+id/new_student_birth_date_et"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/new_student_birth_date_til"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Birth Date"
-        android:focusable="false"
-        android:clickable="true"
-        android:inputType="none"
+        app:endIconMode="custom"
+        app:endIconDrawable="@drawable/ic_calendar"
+        app:endIconContentDescription="Select Date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/new_student_checked_cb" />
+        app:layout_constraintTop_toBottomOf="@+id/new_student_checked_cb">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/new_student_birth_date_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:clickable="true"
+            android:inputType="none" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/new_student_birth_time_til"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Birth Time"
+        app:endIconMode="custom"
+        app:endIconDrawable="@drawable/ic_clock"
+        app:endIconContentDescription="Select Time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/new_student_birth_date_til">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/new_student_birth_time_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:clickable="true"
+            android:inputType="none" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

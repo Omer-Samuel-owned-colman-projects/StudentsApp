@@ -2,6 +2,7 @@ package com.example.studentsapp
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -44,6 +45,7 @@ class EditStudentFragment : Fragment() {
         }
 
         setupDatePicker()
+        setupTimePicker()
 
         binding.editStudentSaveBtn.setOnClickListener {
             saveStudent()
@@ -65,10 +67,11 @@ class EditStudentFragment : Fragment() {
         binding.editStudentForm.newStudentAddressEt.setText(student.address)
         binding.editStudentForm.newStudentCheckedCb.isChecked = student.isChecked
         binding.editStudentForm.newStudentBirthDateEt.setText(student.birthDate)
+        binding.editStudentForm.newStudentBirthTimeEt.setText(student.birthTime)
     }
 
     private fun setupDatePicker() {
-        binding.editStudentForm.newStudentBirthDateEt.setOnClickListener {
+        binding.editStudentForm.newStudentBirthDateTil.setEndIconOnClickListener {
             val calendar = Calendar.getInstance()
             val year = calendar.get(Calendar.YEAR)
             val month = calendar.get(Calendar.MONTH)
@@ -85,6 +88,26 @@ class EditStudentFragment : Fragment() {
         }
     }
 
+    private fun setupTimePicker() {
+        binding.editStudentForm.newStudentBirthTimeTil.setEndIconOnClickListener {
+            val calendar = Calendar.getInstance()
+            val hour = calendar.get(Calendar.HOUR_OF_DAY)
+            val minute = calendar.get(Calendar.MINUTE)
+
+            val timePickerDialog = TimePickerDialog(
+                requireContext(),
+                { _, selectedHour, selectedMinute ->
+                    val amPm = if (selectedHour < 12) "AM" else "PM"
+                    val displayHour = if (selectedHour == 0) 12 else if (selectedHour > 12) selectedHour - 12 else selectedHour
+                    val displayMinute = if (selectedMinute < 10) "0$selectedMinute" else selectedMinute
+                    binding.editStudentForm.newStudentBirthTimeEt.setText("$displayHour:$displayMinute $amPm")
+                },
+                hour, minute, false
+            )
+            timePickerDialog.show()
+        }
+    }
+
     private fun saveStudent() {
         val name = binding.editStudentForm.newStudentNameEt.text.toString()
         val idNumber = binding.editStudentForm.newStudentIdEt.text.toString()
@@ -92,6 +115,7 @@ class EditStudentFragment : Fragment() {
         val address = binding.editStudentForm.newStudentAddressEt.text.toString()
         val isChecked = binding.editStudentForm.newStudentCheckedCb.isChecked
         val birthDate = binding.editStudentForm.newStudentBirthDateEt.text.toString()
+        val birthTime = binding.editStudentForm.newStudentBirthTimeEt.text.toString()
 
         if (name.isBlank() || idNumber.isBlank()) {
             Toast.makeText(context, "Name and ID are required", Toast.LENGTH_SHORT).show()
@@ -105,7 +129,8 @@ class EditStudentFragment : Fragment() {
             phone = phone,
             address = address,
             isChecked = isChecked,
-            birthDate = birthDate
+            birthDate = birthDate,
+            birthTime = birthTime
         )
 
         Model.instance.updateStudent(updatedStudent)

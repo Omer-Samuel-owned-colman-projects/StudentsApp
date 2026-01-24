@@ -2,6 +2,7 @@ package com.example.studentsapp
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -32,6 +33,7 @@ class NewStudentFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupDatePicker()
+        setupTimePicker()
 
         binding.newStudentSaveBtn.setOnClickListener {
             saveStudent()
@@ -43,7 +45,7 @@ class NewStudentFragment : Fragment() {
     }
 
     private fun setupDatePicker() {
-        binding.formLayout.newStudentBirthDateEt.setOnClickListener {
+        binding.formLayout.newStudentBirthDateTil.setEndIconOnClickListener {
             val calendar = Calendar.getInstance()
             val year = calendar.get(Calendar.YEAR)
             val month = calendar.get(Calendar.MONTH)
@@ -60,6 +62,26 @@ class NewStudentFragment : Fragment() {
         }
     }
 
+    private fun setupTimePicker() {
+        binding.formLayout.newStudentBirthTimeTil.setEndIconOnClickListener {
+            val calendar = Calendar.getInstance()
+            val hour = calendar.get(Calendar.HOUR_OF_DAY)
+            val minute = calendar.get(Calendar.MINUTE)
+
+            val timePickerDialog = TimePickerDialog(
+                requireContext(),
+                { _, selectedHour, selectedMinute ->
+                    val amPm = if (selectedHour < 12) "AM" else "PM"
+                    val displayHour = if (selectedHour == 0) 12 else if (selectedHour > 12) selectedHour - 12 else selectedHour
+                    val displayMinute = if (selectedMinute < 10) "0$selectedMinute" else selectedMinute
+                    binding.formLayout.newStudentBirthTimeEt.setText("$displayHour:$displayMinute $amPm")
+                },
+                hour, minute, false
+            )
+            timePickerDialog.show()
+        }
+    }
+
     private fun saveStudent() {
         val name = binding.formLayout.newStudentNameEt.text.toString()
         val idNumber = binding.formLayout.newStudentIdEt.text.toString()
@@ -67,6 +89,7 @@ class NewStudentFragment : Fragment() {
         val address = binding.formLayout.newStudentAddressEt.text.toString()
         val isChecked = binding.formLayout.newStudentCheckedCb.isChecked
         val birthDate = binding.formLayout.newStudentBirthDateEt.text.toString()
+        val birthTime = binding.formLayout.newStudentBirthTimeEt.text.toString()
 
         if (name.isBlank() || idNumber.isBlank()) {
             Toast.makeText(context, "Name and ID are required", Toast.LENGTH_SHORT).show()
@@ -80,7 +103,8 @@ class NewStudentFragment : Fragment() {
             phone = phone,
             address = address,
             isChecked = isChecked,
-            birthDate = birthDate
+            birthDate = birthDate,
+            birthTime = birthTime
         )
 
         Model.instance.addStudent(student)
